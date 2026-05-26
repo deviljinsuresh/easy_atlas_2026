@@ -1,1 +1,1 @@
-from easy_atlas.core import *
+from .core import *

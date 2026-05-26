@@ -1,4 +1,4 @@
-var args = "53345,d:/easyatlas/sourceimages/__out.tga,512,512,D:/EasyAtlas/sourceimages/crate01_diff.tga,0,0,256,256,D:/EasyAtlas/sourceimages/chair_diff.tga,256,0,256,256,D:/EasyAtlas/sourceimages/mailbox_diff.tga,0,256,256,256,D:/EasyAtlas/sourceimages/shield_diff.tga,256,256,256,256"
+var args = "50566,c:/users/suresh.selvaraj/onedrive - lightnwonder/atlastest.jpg,2048,2048,D:/Unity_Projects_2/L5CG3131YNP-BLR_VPITHYBCDIS01_8293/StarlightContent/ObsidianHybridDisplay/Assets/SBJ/TableBlackJack/VpitTable3D/Art/VirtualLobby/Textures/Common/T_VirtualPit_Common_POD_Chair_Cabinet_Atlas_Diffuse.tga,0,0,1024,1024,D:/Unity_Projects_2/L5CG3131YNP-BLR_VPITHYBCDIS01_8293/StarlightContent/ObsidianHybridDisplay/Assets/SBJ/TableBlackJack/VpitTable3D/Art/VirtualLobby/Textures/Common/T_VirtualPit_Common_POD_Chair_Cabinet_Atlas_Diffuse.tga,1024,0,1024,1024"
 var argList = args.split(",")
 
 var oldRulerUnits = preferences.rulerUnits;
