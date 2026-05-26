@@ -1,54 +1,30 @@
-import ConfigParser, os
+
+import configparser, os
 
 class INIHandler:
-    '''INIHandler simplifies the load/save information on INI style files.'''
-    
     @staticmethod
     def load_info(_file, option, debug=False):
-        '''Load info from config file.
-        
-        Args:
-            _file: short filename
-            option: field where the information will be read from
-            debug: boolean for printing debug information in the script editor
-        '''
-        
-        configFilename = os.environ['TMPDIR']+"/"+_file
-        
-        config = ConfigParser.RawConfigParser()
+        configFilename = os.environ.get('TMPDIR', os.getenv('TEMP', '')) + "/" + _file
+        config = configparser.ConfigParser()
         config.read(configFilename)
         info = ""
         try:
             info = config.get("ROOT", option)
         except:
             pass
-            
-        if debug: print configFilename    
-        
+        if debug:
+            print(configFilename)
         return info
-    
+
     @staticmethod
     def save_info(_file, option, info, debug=False):
-        '''Save info into config file.
-        
-        Args:
-            _file: short filename
-            option: field where the information will be saved
-            info: information that will be stored
-            debug: boolean for printing debug information in the script editor
-        '''
-        
-        configFilename = os.environ['TMPDIR']+"/"+_file
-        
-        config = ConfigParser.RawConfigParser()
+        configFilename = os.environ.get('TMPDIR', os.getenv('TEMP', '')) + "/" + _file
+        config = configparser.ConfigParser()
         config.read(configFilename)
-        try:
+        if not config.has_section("ROOT"):
             config.add_section('ROOT')
-        except:
-            pass
-        config.set('ROOT', option, info)
-        
-        with open(configFilename, 'wb') as configfile:
+        config.set('ROOT', option, str(info))
+        with open(configFilename, 'w', encoding='utf-8') as configfile:
             config.write(configfile)
-            
-        if debug: print configFilename
+        if debug:
+            print(configFilename)

@@ -1,7 +1,15 @@
-from PySide2.QtCore import * 
-from PySide2.QtGui import *
-from PySide2.QtUiTools import *
-from PySide2.QtWidgets import *
+try:
+    from PySide6.QtCore import *
+    from PySide6.QtGui import *
+    from PySide6.QtUiTools import *
+    from PySide6.QtWidgets import *
+    
+except ImportError:
+    from PySide2.QtCore import *
+    from PySide2.QtGui import *
+    from PySide2.QtUiTools import *
+    from PySide2.QtWidgets import *
+    
 import maya.cmds as cmds
 import maya.mel as mel
 import os, random, json
@@ -568,7 +576,7 @@ class EasyAtlas():
             else:
                 tableMeshes.setItem(index, 0, QTableWidgetItem(str(k.id)))
                 
-            tableMeshes.item(index, 0).setTextAlignment(Qt.AlignHCenter)
+            tableMeshes.item(index, 0).setTextAlignment(Qt.AlignmentFlag.AlignHCenter)
             tableMeshes.setItem(index, 1, QTableWidgetItem(k.meshName))
             tableMeshes.setItem(index, 2, QTableWidgetItem(k.texture))
             
@@ -592,9 +600,9 @@ class EasyAtlas():
         
         #tableMeshes.horizontalHeader().setStretchLastSection(True)
         tableMeshes.setHorizontalHeaderLabels(["Atlas", "Mesh", "Texture"])
-        tableMeshes.horizontalHeaderItem(0).setTextAlignment(Qt.AlignHCenter)
-        tableMeshes.horizontalHeaderItem(1).setTextAlignment(Qt.AlignLeft)
-        tableMeshes.horizontalHeaderItem(2).setTextAlignment(Qt.AlignLeft)
+        tableMeshes.horizontalHeaderItem(0).setTextAlignment(Qt.AlignmentFlag.AlignHCenter)
+        tableMeshes.horizontalHeaderItem(1).setTextAlignment(Qt.AlignmentFlag.AlignLeft)
+        tableMeshes.horizontalHeaderItem(2).setTextAlignment(Qt.AlignmentFlag.AlignLeft)
         tableMeshes.setColumnWidth(0, 40)
         tableMeshes.setColumnWidth(1, 150)
         tableMeshes.resizeColumnToContents(2)

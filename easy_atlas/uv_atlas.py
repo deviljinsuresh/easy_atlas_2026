@@ -1,13 +1,34 @@
+
 import maya.cmds as cmds
 import maya.mel as mel
 
 def createAtlas(aItems):
-    '''Create UV atlas.'''
-    
-    mel.eval('scriptEditorInfo -e -suppressWarnings true;')  # @UndefinedVariable
-       
+    try:
+        mel.eval('scriptEditorInfo -e -suppressWarnings true;')
+    except:
+        pass
+
     for k in aItems:
-        
-        cmds.select("%s.map[0:]" % k.mesh)  # @UndefinedVariable
-        cmds.polyEditUV(pivotU=0, pivotV=1, scaleU=k.sizeX, scaleV=k.sizeY)  # @UndefinedVariable
-        cmds.polyMoveUV(tu=k.posX, tv=-k.posY)  # @UndefinedVariable
+        if not cmds.objExists(k.mesh):
+            cmds.warning("Mesh does not exist: %s" % k.mesh)
+            continue
+
+        try:
+            cmds.select(clear=True)
+            cmds.select(k.mesh)
+            cmds.select(cmds.polyListComponentConversion(toUV=True))
+
+            cmds.polyEditUV(
+                pivotU=0,
+                pivotV=1,
+                scaleU=k.sizeX,
+                scaleV=k.sizeY
+            )
+
+            cmds.polyMoveUV(
+                translationU=k.posX,
+                translationV=-k.posY
+            )
+
+        except Exception as e:
+            cmds.warning("UV atlas failed on %s: %s" % (k.mesh, str(e)))
